@@ -1,0 +1,13 @@
+@import "stylesheets/utils.scss";
+
+h2 {
+  @include title-xxlarge;
+  text-align: center;
+  color: $dark-navy;
+  cursor: pointer;
+}
+
+p {
+  @include paragraph;
+  text-align: center;
+}

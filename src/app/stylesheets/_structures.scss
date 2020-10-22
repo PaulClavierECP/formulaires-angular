@@ -1,0 +1,41 @@
+@import './utils.scss';
+
+.title-block {
+  margin-bottom: spacing(7);
+
+  .site-title + .subtitle {
+    margin-top: spacing(4);
+  }
+}
+
+.section-block {
+  margin-bottom: spacing(4);
+
+  & > * + * {
+    margin-top: spacing(4);
+  }
+
+  & > .section-title + p {
+    margin-top: spacing(2);
+  }
+}
+
+.actions-block {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+
+  @include isMobile {
+    flex-direction: column;
+
+    .bpi-button {
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
+
+    .bpi-button_content {
+      justify-content: center;
+    }
+  }
+}

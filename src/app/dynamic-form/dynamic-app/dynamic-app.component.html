@@ -1,0 +1,60 @@
+<bpi-button color="secondary" (click)="this.help = !this.help" [icon]="true"
+  >Aide</bpi-button
+>
+<ul *ngIf="help">
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode1 = !this.showCode1"
+      >1. Présenter le modèle du Formulaire</bpi-button
+    >
+  </li>
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode2 = !this.showCode2"
+      >2. Créer le contenu du Formulaire</bpi-button
+    >
+  </li>
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode3 = !this.showCode3"
+      >3. Créer le Formulaire</bpi-button
+    >
+  </li>
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode4 = !this.showCode4"
+      >4. Créer controls et inputs du Formulaire</bpi-button
+    >
+  </li>
+</ul>
+
+<div>
+  <h2>Job Application for Sipionautes</h2>
+  <app-dynamic-form [models]="models$ | async"></app-dynamic-form>
+</div>
+
+<div *ngIf="showCode1">
+  <ul>
+    <li>Commencer par Model Base</li>
+    <li>Expliquer controltype des composants</li>
+  </ul>
+</div>
+
+<div *ngIf="showCode2">
+  <ul>
+    <li>ModelService pour la liste des questions</li>
+    <li>Création de l'app</li>
+  </ul>
+</div>
+
+<div *ngIf="showCode3">
+  <ul>
+    <li>Créer le formulaire dans le Dynamic Form</li>
+    <li>
+      On a besoin de controls et d'inputs. Les inputs ont besoin de controls
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="showCode4">
+  <ul>
+    <li>Créer les controls, ce qui gère les valeurs</li>
+    <li>Créer l'input, l'élément visuel</li>
+  </ul>
+</div>

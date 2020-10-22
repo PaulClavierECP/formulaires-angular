@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+  <div class="form-group">
+    <label for="firstname">Prénom</label>
+    <input
+      type="text"
+      id="firstname"
+      [(ngModel)]="firstname"
+      name="firstname"
+    />
+  </div>
+  <button type="submit">Submit</button>
+</form>
+
+<p>{{ firstname }}</p>

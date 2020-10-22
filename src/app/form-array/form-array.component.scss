@@ -1,0 +1,140 @@
+@import "../stylesheets/utils.scss";
+
+pre {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #f36d33;
+  color: #666;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
+
+.error-message {
+  color: $dark-red;
+  @include paragraph;
+}
+
+p {
+  @include paragraph;
+}
+
+label {
+  @include paragraph;
+}
+
+h2 {
+  @include title-small;
+}
+
+li {
+  @include paragraph;
+}
+
+.title {
+  @include title-large;
+  padding-bottom: spacing(2);
+}
+
+.tooltip {
+  padding-bottom: spacing(3);
+}
+
+.description {
+  padding-bottom: spacing(4);
+}
+
+.header {
+  display: flex;
+  padding-top: spacing(3);
+}
+
+.subtitle {
+  @include title-small;
+  padding-bottom: spacing(4);
+}
+
+.delete {
+  cursor: pointer;
+  @include paragraph;
+  font-weight: bold;
+  color: $primary-light;
+
+  margin-top: 0.2em;
+  display: inline-block;
+  padding-left: spacing(1);
+
+  mat-icon {
+    color: $primary-light;
+    vertical-align: middle;
+    margin-bottom: 0.1em;
+  }
+}
+
+.error-message {
+  color: $app-red;
+  font-size: $text-medium-size;
+  line-height: 150%;
+
+  margin: $spacing-xxsmall 0;
+  height: 21px;
+
+  &.hidden {
+    visibility: hidden;
+
+    @include isMobile {
+      display: none;
+    }
+  }
+}
+
+.hide-error-message {
+  display: none;
+}
+
+.add-shareholder {
+  margin-top: spacing(6);
+  padding-bottom: spacing(4);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  padding: spacing(2);
+
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px dashed $primary;
+
+  cursor: pointer;
+
+  @include white-ripple();
+  @include paragraph;
+
+  &:hover {
+    border: 1px solid $primary;
+  }
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+  padding-left: spacing(1);
+
+  mat-icon {
+    font-size: 24px;
+    font-weight: 1000;
+    margin-right: spacing(2);
+  }
+}
+
+.error-tooltip {
+  padding-top: spacing(3);
+}

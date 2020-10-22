@@ -1,0 +1,8 @@
+<form *ngIf="!disabled">
+  <input
+    placeholder="Email"
+    [formControl]="emailControl"
+    (keyup)="propagateChange($event.target.value)"
+    (blur)="propagateTouched($event)"
+  />
+</form>

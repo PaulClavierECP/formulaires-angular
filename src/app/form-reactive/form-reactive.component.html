@@ -1,0 +1,482 @@
+<h2>Construisons le template pour un formulaire</h2>
+
+<bpi-button color="secondary" (click)="this.help = !this.help" [icon]="true"
+  >Aide</bpi-button
+>
+<ul *ngIf="help">
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode1 = !this.showCode1"
+      >1. créer un FormControl</bpi-button
+    >
+  </li>
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode2 = !this.showCode2"
+      >2. créer un update sur le FormControl</bpi-button
+    >
+  </li>
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode3 = !this.showCode3"
+      >3. créer un FormBuilder + FormGroup</bpi-button
+    >
+  </li>
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode4 = !this.showCode4"
+      >4. créer un disable sur le FormGroup</bpi-button
+    >
+  </li>
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode5 = !this.showCode5"
+      >5. créer un FormArray</bpi-button
+    >
+  </li>
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode6 = !this.showCode6"
+      >6. créer les Add / Delete</bpi-button
+    >
+  </li>
+  <li>
+    <bpi-button color="secondary" (click)="this.showCode7 = !this.showCode7"
+      >7. créer un customValidator</bpi-button
+    >
+  </li>
+</ul>
+
+<form [formGroup]="inscription" (ngSubmit)="onClick()">
+  <label>Tu t'appelles ?</label>
+  <input
+    type="text"
+    placeholder="Ton prénom"
+    formControlName="firstname"
+  /><br />
+  <label>Tu t'appelles comment au complet?</label>
+  <input type="text" placeholder="Ton nom" formControlName="lastname" /><br />
+  <label>Tu veux indiquer ton genre ?</label>
+  <input type="checkbox" formControlName="fillGender" /><br />
+  <label>Ton genre</label> <input type="text" formControlName="gender" /><br />
+
+  <div *ngFor="let actionnaire of actionnaires.controls; let i = index">
+    <div [formGroup]="actionnaire">
+      <p>Actionnaire {{ i + 1 }}</p>
+      <div class="delete" (click)="deleteActionnaire(i)">Supprimer</div>
+
+      <label>Les actions de ton potes</label>
+      <input type="number" placeholder="%" formControlName="action" />
+    </div>
+  </div>
+  <button type="button" (click)="addActionnaire()">
+    <p>Allez on en rajoute un !</p>
+  </button>
+  <button type="button" (click)="updateName()">Fill</button>
+  <bpi-button type="submit" [disabled]="!inscription.valid"> Save </bpi-button>
+</form>
+
+<div *ngIf="showCode1">
+  <h2>Code</h2>
+  <p>HTML</p>
+  <code>
+    <pre>
+      &lt;form (ngSubmit)="onClick()"&gt;
+        &lt;label&gt;Tu t'appelles ?&lt;/label&gt;
+        &lt;input type="text" placeholder="Nom" formControlName="name" /&gt;
+        &lt;bpi-button type="submit" [disabled]="!name.valid"&gt; Save &lt;/bpi-button&gt;
+      &lt;/form&gt;
+    </pre>
+  </code>
+
+  <p>TypeScript</p>
+
+  <code>
+    <pre>
+      name = new FormControl('');
+      onClick() &#123;
+        this.router.navigate(['/home']);
+      &#125;
+    </pre>
+  </code>
+</div>
+
+<div *ngIf="showCode2">
+  <h2>Code</h2>
+  <p>HTML</p>
+  <code>
+    <pre>
+      &lt;form (ngSubmit)="onClick()"&gt;
+        &lt;label&gt;Tu t'appelles ?&lt;/label&gt;
+        &lt;input type="text" placeholder="Nom" formControlName="firstname" /&gt;
+        &lt;button type="button" (click)="updateName()"&gt; Fill &lt;/button&gt;
+        &lt;bpi-button type="submit" [disabled]="!name.valid"&gt; Save &lt;/bpi-button&gt;
+      &lt;/form&gt;
+    </pre>
+  </code>
+
+  <p>TypeScript</p>
+
+  <code>
+    <pre>
+      name = new FormControl('');
+
+      updateName() &#123;
+        this.firstname.setValue('Batman');
+        &#125;
+
+      onClick() &#123;
+        this.router.navigate(['/home']);
+      &#125;
+    </pre>
+  </code>
+</div>
+
+<div *ngIf="showCode3">
+  <h2>Code</h2>
+  <p>HTML</p>
+  <code>
+    <pre>
+      &lt;form [formGroup]="inscription" (ngSubmit)="onClick()"&gt;
+        &lt;label&gt;Tu t'appelles ?&lt;/label&gt;
+        &lt;input
+          type="text"
+          placeholder="Ton prénom"
+          formControlName="firstname"
+        /&gt;&lt;br /&gt;
+        &lt;label&gt;Tu t'appelles comment au complet?&lt;/label&gt;
+        &lt;input type="text" placeholder="Ton nom" formControlName="lastname" /&gt;&lt;br /&gt;
+
+        &lt;button type="button" (click)="updateName()"&gt;Fill&lt;/button&gt;
+        &lt;bpi-button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/bpi-button&gt;
+      &lt;/form&gt;
+    </pre>
+  </code>
+
+  <p>TypeScript</p>
+
+  <code>
+    <pre>
+      inscription: FormGroup;
+
+      constructor(private fb: FormBuilder, private router: Router) &#123;
+        this.inscription = this.fb.group(&#123;
+          firstname: ['', Validators.required],
+          lastname: ['', Validators.required],
+        &#125;);
+      &#125;
+
+
+      updateName() &#123;
+        this.inscription.controls.firstname.setValue('Batman');
+      &#125;
+
+      onClick() &#123;
+        this.router.navigate(['/home']);
+      &#125;
+    </pre>
+  </code>
+</div>
+
+<div *ngIf="showCode4">
+  <h2>Code</h2>
+  <p>HTML</p>
+  <code>
+    <pre>
+      &lt;form [formGroup]="inscription" (ngSubmit)="onClick()"&gt;
+        &lt;label&gt;Tu t'appelles ?&lt;/label&gt;
+        &lt;input
+          type="text"
+          placeholder="Ton prénom"
+          formControlName="firstname"
+        /&gt;&lt;br /&gt;
+        &lt;label&gt;Tu t'appelles comment au complet?&lt;/label&gt;
+        &lt;input type="text" placeholder="Ton nom" formControlName="lastname" /&gt;&lt;br /&gt;
+        &lt;label&gt;Tu veux indiquer ton genre ?&lt;/label&gt;
+        &lt;input type="checkbox" formControlName="fillGender" /&gt;&lt;br /&gt;
+        &lt;label&gt;Ton genre&lt;/label&gt;
+        &lt;input type="text" formControlName="gender" /&gt;&lt;br /&gt;
+
+        &lt;button type="button" (click)="updateName()"&gt;Fill&lt;/button&gt;
+        &lt;bpi-button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/bpi-button&gt;
+      &lt;/form&gt;
+    </pre>
+  </code>
+
+  <p>TypeScript</p>
+
+  <code>
+    <pre>
+      inscription: FormGroup;
+
+      constructor(private fb: FormBuilder, private router: Router) &#123;
+        this.inscription = this.fb.group(&#123;
+          firstname: ['', Validators.required],
+          lastname: ['', Validators.required],
+          fillGender: [false],
+          gender: [&#123; value: null, disabled: true &#125;],
+        &#125;);
+      &#125;
+
+      ngOnInit(): void &#123;
+        let gender = this.inscription.get('gender');
+        this.inscription.controls.fillGender.valueChanges.subscribe((data) => &#123;
+          if (data && gender) &#123;
+            gender.enable();
+          &#125; else &#123;
+            gender.disable();
+          &#125;
+        &#125;);
+      &#125;
+
+      updateName() &#123;
+        this.inscription.controls.firstname.setValue('Batman');
+      &#125;
+
+      onClick() &#123;
+        this.router.navigate(['/home']);
+      &#125;
+    </pre>
+  </code>
+</div>
+
+<div *ngIf="showCode5">
+  <h2>Code</h2>
+  <p>HTML</p>
+  <code>
+    <pre>
+      &lt;form [formGroup]="inscription" (ngSubmit)="onClick()"&gt;
+        &lt;label&gt;Tu t'appelles ?&lt;/label&gt;
+        &lt;input
+          type="text"
+          placeholder="Ton prénom"
+          formControlName="firstname"
+        /&gt;&lt;br /&gt;
+        &lt;label&gt;Tu t'appelles comment au complet?&lt;/label&gt;
+        &lt;input type="text" placeholder="Ton nom" formControlName="lastname" /&gt;&lt;br /&gt;
+        &lt;label&gt;Tu veux indiquer ton genre ?&lt;/label&gt;
+        &lt;input type="checkbox" formControlName="fillGender" /&gt;&lt;br /&gt;
+        &lt;label&gt;Ton genre&lt;/label&gt; &lt;input type="text" formControlName="gender" /&gt;&lt;br /&gt;
+
+        &lt;div *ngFor="let actionnaire of actionnaires.controls; let i = index"&gt;
+          &lt;div [formGroup]="actionnaire"&gt;
+            &lt;label&gt;Les actions de tes potes&lt;/label&gt;
+            &lt;input type="number" placeholder="%" formControlName="action" /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button type="button" (click)="updateName()"&gt;Fill&lt;/button&gt;
+        &lt;bpi-button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/bpi-button&gt;
+      &lt;/form&gt;
+
+    </pre>
+  </code>
+
+  <p>Typescript</p>
+  <code>
+    <pre>
+      inscription: FormGroup;
+
+      constructor(private fb: FormBuilder, private router: Router) &#123;
+        this.inscription = this.fb.group(&#123;
+          firstname: ['', Validators.required],
+          lastname: ['', Validators.required],
+          fillGender: [false],
+          gender: [&#123; value: null, disabled: true &#125;],
+          actionnaires: this.fb.array([
+            this.fb.group(&#123;
+              action: [0],
+            &#125;),
+          ]),
+        &#125;);
+      &#125;
+
+      get actionnaires() &#123;
+        return this.inscription.controls.actionnaires as FormArray;
+      &#125;
+
+      ngOnInit(): void &#123;
+        let gender = this.inscription.get('gender');
+        this.inscription.controls.fillGender.valueChanges.subscribe((data) => &#123;
+          if (data && gender) &#123;
+            gender.enable();
+          &#125; else &#123;
+            gender.disable();
+          &#125;
+        &#125;);
+      &#125;
+
+      updateName() &#123;
+        this.inscription.controls.firstname.setValue('Batman');
+      &#125;
+
+      onClick() &#123;
+        this.router.navigate(['/home']);
+      &#125;
+    </pre>
+  </code>
+</div>
+
+<div *ngIf="showCode6">
+  <h2>Code</h2>
+  <p>HTML</p>
+  <code>
+    <pre>
+      &lt;form [formGroup]="inscription" (ngSubmit)="onClick()"&gt;
+        &lt;label&gt;Tu t'appelles ?&lt;/label&gt;
+        &lt;input
+          type="text"
+          placeholder="Ton prénom"
+          formControlName="firstname"
+        /&gt;&lt;br /&gt;
+        &lt;label&gt;Tu t'appelles comment au complet?&lt;/label&gt;
+        &lt;input type="text" placeholder="Ton nom" formControlName="lastname" /&gt;&lt;br /&gt;
+        &lt;label&gt;Tu veux indiquer ton genre ?&lt;/label&gt;
+        &lt;input type="checkbox" formControlName="fillGender" /&gt;&lt;br /&gt;
+        &lt;label&gt;Ton genre&lt;/label&gt; &lt;input type="text" formControlName="gender" /&gt;&lt;br /&gt;
+
+        &lt;div *ngFor="let actionnaire of actionnaires.controls; let i = index"&gt;
+          &lt;div [formGroup]="actionnaire"&gt;
+            &lt;p&gt;Actionnaire {{ i + 1 }}&lt;/p&gt;
+            &lt;div class="delete" (click)="deleteActionnaire(i)"&gt;Supprimer&lt;/div&gt;
+
+            &lt;label&gt;Les actions de ton potes&lt;/label&gt;
+            &lt;input type="number" placeholder="%" formControlName="action" /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button type="button" (click)="addActionnaire()"&gt;
+          &lt;p&gt;Allez on en rajoute un !&lt;/p&gt;
+        &lt;/button&gt;
+        &lt;button type="button" (click)="updateName()"&gt;Fill&lt;/button&gt;
+        &lt;bpi-button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/bpi-button&gt;
+      &lt;/form&gt;
+    </pre>
+  </code>
+
+  <p>TypeScript</p>
+
+  <code>
+    <pre>
+      inscription: FormGroup;
+
+      constructor(private fb: FormBuilder, private router: Router) &#123;
+        this.inscription = this.fb.group(&#123;
+          firstname: ['', Validators.required],
+          lastname: ['', Validators.required],
+          fillGender: [false],
+          gender: [&#123; value: null, disabled: true &#125;],
+          actionnaires: this.fb.array([
+            this.fb.group(&#123;
+              action: [0],
+            &#125;),
+          ]),
+        &#125;);
+      &#125;
+
+      get actionnaires() &#123;
+        return this.inscription.controls.actionnaires as FormArray;
+      &#125;
+
+      ngOnInit(): void &#123;
+        let gender = this.inscription.get('gender');
+        this.inscription.controls.fillGender.valueChanges.subscribe((data) => &#123;
+          if (data && gender) &#123;
+            gender.enable();
+          &#125; else &#123;
+            gender.disable();
+          &#125;
+        &#125;);
+      &#125;
+
+      updateName() &#123;
+        this.inscription.controls.firstname.setValue('Batman');
+      &#125;
+
+      addActionnaire() &#123;
+        this.actionnaires.push(
+          this.fb.group(&#123;
+            share: [0],
+          &#125;)
+        );
+      &#125;
+
+      deleteActionnaire(id: number) &#123;
+        this.actionnaires.removeAt(id);
+      &#125;
+
+      onClick() &#123;
+        this.router.navigate(['/home']);
+      &#125;
+    </pre>
+  </code>
+</div>
+
+<div *ngIf="showCode7">
+  <h2>Code</h2>
+  <p>HTML</p>
+  <code>
+    <pre></pre>
+  </code>
+
+  <p>TypeScript</p>
+
+  <code>
+    <pre>
+
+      const getValidationErrors: ValidatorFn = (control: AbstractControl) => &#123;
+        const values = control.get('actionnaires').value;
+        const shares = values.map((actionnaire) => actionnaire.action);
+        const shareTotal = shares.reduce((sum, el) => sum + el, 0);
+        if (shareTotal === 100) &#123;
+          return null;
+        &#125; else &#123;
+          return &#123; sumOfShares: 'NotHundred' &#125;;
+        &#125;
+      &#125;;
+
+      inscription: FormGroup;
+
+      constructor(private fb: FormBuilder, private router: Router) &#123;
+        this.inscription = this.fb.group(&#123;
+          firstname: ['', Validators.required],
+          lastname: ['', Validators.required],
+          fillGender: [false],
+          gender: [&#123; value: null, disabled: true &#125;],
+          actionnaires: this.fb.array([
+            this.fb.group(&#123;
+              action: [0],
+            &#125;),
+          ]),
+        &#125;);
+      &#125;
+
+      get actionnaires() &#123;
+        return this.inscription.controls.actionnaires as FormArray;
+      &#125;
+
+      ngOnInit(): void &#123;
+        let gender = this.inscription.get('gender');
+        this.inscription.controls.fillGender.valueChanges.subscribe((data) => &#123;
+          if (data && gender) &#123;
+            gender.enable();
+          &#125; else &#123;
+            gender.disable();
+          &#125;
+        &#125;);
+      &#125;
+
+      updateName() &#123;
+        this.inscription.controls.firstname.setValue('Batman');
+      &#125;
+
+      addActionnaire() &#123;
+        this.actionnaires.push(
+          this.fb.group(&#123;
+            share: [0],
+          &#125;)
+        );
+      &#125;
+
+      deleteActionnaire(id: number) &#123;
+        this.actionnaires.removeAt(id);
+      &#125;
+
+      onClick() &#123;
+        this.router.navigate(['/home']);
+      &#125;
+    </pre>
+  </code>
+</div>

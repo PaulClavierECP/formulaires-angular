@@ -1,0 +1,24 @@
+<div [formGroup]="form">
+  <label [attr.for]="model.name">{{ model.label }}</label>
+
+  <div [ngSwitch]="model.controlType">
+    <input
+      *ngSwitchCase="'text'"
+      [formControlName]="model.name"
+      [id]="model.name"
+      [type]="model.type"
+    />
+
+    <select
+      [id]="model.name"
+      *ngSwitchCase="'dropdown'"
+      [formControlName]="model.name"
+    >
+      <option *ngFor="let opt of model.options" [value]="opt.key">
+        {{ opt.value }}
+      </option>
+    </select>
+  </div>
+
+  <div class="errorMessage" *ngIf="!isValid">{{ model.label }} is required</div>
+</div>

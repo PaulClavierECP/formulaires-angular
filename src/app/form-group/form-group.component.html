@@ -1,0 +1,102 @@
+<h2>Construisons le group de controls</h2>
+
+<ul>
+  <li>Le <code>formBuilder</code></li>
+  <li>Les conditions</li>
+  <li>L'observables valueChanges</li>
+</ul>
+
+<form [formGroup]="inscription" (ngSubmit)="onClick()">
+  <div class="error-message">
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  </div>
+  <input
+    type="text"
+    placeholder="Ton prénom"
+    formControlName="firstname"
+  /><br />
+  <input type="text" placeholder="Ton nom" formControlName="lastname" /><br />
+  <label>Tu veux indiquer ton genre ?</label>
+  <input type="checkbox" formControlName="fillGender" /><br />
+
+  <label class="container" *ngFor="let choice of genderChoices">
+    <span [innerHTML]="choice.label"></span>
+    <input type="radio" formControlName="gender" [value]="choice.name" />
+    <span class="checkmark"></span>
+  </label>
+
+  <bpi-button type="submit" [disabled]="!inscription.valid"> Save </bpi-button>
+</form>
+
+<bpi-button color="secondary" (click)="this.showCode = !this.showCode"
+  >Code</bpi-button
+>
+
+<div *ngIf="showCode">
+  <h2>Plan</h2>
+  <ul>
+    <li>Construire le formGroup nom et prénom HTML</li>
+    <li>Construire le formGroup nom et prénom TS avec le FormBuilder</li>
+    <li>Subscribe sur le values changes dans le onInit</li>
+  </ul>
+  <h2>Code</h2>
+  <p>HTML</p>
+  <code>
+    <pre>
+      &lt;form [formGroup]="inscription" (ngSubmit)="onClick()"&gt;
+        &lt;div class="error-message"&gt;
+          &lt;p *ngIf="errorMessage"&gt;{{ errorMessage }}&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;input placeholder="Username" formControlName="firstname" /&gt;&lt;br /&gt;
+        &lt;input placeholder="Ton nom" formControlName="lastname" /&gt;&lt;br /&gt;
+        &lt;label&gt;Tu veux indiquer ton genre ?&lt;/label&gt;
+        &lt;input type="checkbox" formControlName="fillGender" /&gt;&lt;br /&gt;
+        &lt;div *ngIf="inscription.get('fillGender').value"&gt;
+          &lt;label class="container" *ngFor="let choice of genderChoices"&gt;
+            &lt;span [innerHTML]="choice.label"&gt;&lt;/span&gt;
+            &lt;input type="radio" formControlName="gender" [value]="choice.name" /&gt;
+            &lt;span class="checkmark"&gt;&lt;/span&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+        &lt;bpi-button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/bpi-button&gt;
+      &lt;/form&gt;
+  </pre
+    >
+  </code>
+
+  <p>TypeScript</p>
+
+  <code>
+    <pre>
+      inscription: FormGroup;
+      errorMessage: string | null = null;
+      genderChoices = [
+        &#123; name: 'female', label: 'Femme' &#125;,
+        &#123; name: 'male', label: 'Homme' &#125;,
+      ];
+
+      constructor(private fb: FormBuilder, private router: Router) &#123;
+        this.inscription = this.fb.group(&#123;
+          firstname: ['', Validators.required],
+          lastname: ['', Validators.required],
+          fillGender: [false],
+          gender: [&#123; value: '', disabled: true &#125;],
+        &#125;);
+      &#125;
+
+      ngOnInit(): void &#123;
+        let gender = this.inscription.get('gender');
+        this.inscription.controls.fillGender.valueChanges.subscribe((data) => &#123;
+          if (data && gender) &#123;
+            gender.enable();
+          &#125; else &#123;
+            gender.disable();
+          &#125;
+        &#125;);
+      &#125;
+      onClick() &#123;
+        this.router.navigate(['/home']);
+      &#125;
+    </pre>
+  </code>
+</div>

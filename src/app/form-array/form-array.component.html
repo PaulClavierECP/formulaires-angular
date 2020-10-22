@@ -1,0 +1,177 @@
+<h2>Construisons le group de controls</h2>
+
+<ul>
+  <li>Le formArray</li>
+  <li>Le validateur custom</li>
+</ul>
+
+<form [formGroup]="formulaire" (ngSubmit)="onClick()">
+  <div *ngFor="let actionnaire of actionnaires.controls; let i = index">
+    <div [formGroup]="actionnaire">
+      <div class="header">
+        <p class="subtitle">Actionnaire {{ i + 1 }}</p>
+        <div class="delete" (click)="deleteActionnaire(i)">Supprimer</div>
+      </div>
+      <input
+        type="text"
+        placeholder="Ton prénom"
+        formControlName="firstname"
+      /><br />
+      <input
+        type="text"
+        placeholder="Ton nom"
+        formControlName="lastname"
+      /><br />
+      <input type="number" placeholder="%" formControlName="share" />
+    </div>
+  </div>
+  <div class="add-shareholder">
+    <button class="container" (click)="addActionnaire()">
+      <div class="content">
+        <p>Allez on en rajoute un !</p>
+      </div>
+    </button>
+  </div>
+  <bpi-button type="submit" [disabled]="!formulaire.valid"> Save </bpi-button>
+</form>
+<bpi-tooltip
+  class="error-tooltip"
+  *ngIf="formulaire.errors?.sumOfShares"
+  [intent]="TooltipIntent.ERROR"
+  title="Erreur de formulaire"
+  text="La somme des parts ne fait pas 100%"
+></bpi-tooltip>
+
+<bpi-button color="secondary" (click)="this.showCode = !this.showCode"
+  >Code</bpi-button
+>
+
+<div *ngIf="showCode">
+  <h2>Plan</h2>
+  <ul>
+    <li>Commencer par construire le formArray dans le TS avec le getter</li>
+    <li>Créer la logique de boucle en HTML pour les inputs</li>
+    <li>Ajouter les boutons Delete et Add (HTML + TS)</li>
+    <li>Ajouter le validateur avec le tooltip</li>
+  </ul>
+  <h2>Code</h2>
+  <p>HTML</p>
+  <code>
+    <pre>
+      &lt;form [formGroup]="formulaire" (ngSubmit)="onClick()"&gt;
+        &lt;div *ngFor="let actionnaire of actionnaires.controls; let i = index"&gt;
+          &lt;div [formGroup]="actionnaire"&gt;
+            &lt;div class="header"&gt;
+              &lt;p class="subtitle"&gt;Actionnaire {{ i + 1 }}&lt;/p&gt;
+              &lt;div class="delete" (click)="deleteActionnaire(i)"&gt;Supprimer&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;input
+              type="text"
+              placeholder="Ton prénom"
+              formControlName="firstname"
+            /&gt;&lt;br /&gt;
+            &lt;input
+              type="text"
+              placeholder="Ton nom"
+              formControlName="lastname"
+            /&gt;&lt;br /&gt;
+            &lt;input type="number" placeholder="%" formControlName="share" /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="add-shareholder"&gt;
+          &lt;button class="container" (click)="addActionnaire()"&gt;
+            &lt;div class="content"&gt;
+              &lt;p&gt;Allez on en rajoute un !&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;bpi-button type="submit" [disabled]="!formulaire.valid"&gt; Save &lt;/bpi-button&gt;
+      &lt;/form&gt;
+      &lt;bpi-tooltip
+        class="error-tooltip"
+        *ngIf="formulaire.errors?.sumOfShares"
+        [intent]="TooltipIntent.ERROR"
+        title="Erreur de formulaire"
+        text="La somme des parts ne fait pas 100%"
+      &gt;&lt;/bpi-tooltip&gt;
+    </pre>
+  </code>
+  <p>Validator</p>
+  <code>
+    <pre>
+      const getValidationErrors: ValidatorFn = (control: AbstractControl) => &#123;
+        const values = control.get('actionnaires').value;
+        const shares = values.map((actionnaire) => actionnaire.share);
+        const shareTotal = shares.reduce((sum, el) => sum + el, 0);
+        if (shareTotal === 100) &#123;
+          return null;
+        &#125; else &#123;
+          return &#123; sumOfShares: 'NotHundred' &#125;;
+        &#125;
+      &#125;;
+    </pre>
+  </code>
+  <p>Typescript</p>
+  <code>
+    <pre>
+      showCode = false;
+  public TooltipIntent = TooltipIntent;
+
+  formulaire: FormGroup;
+  errorMessage: string | null = null;
+
+  constructor(private fb: FormBuilder) &#123;
+    this.formulaire = this.fb.group(
+      &#123;
+        actionnaires: this.fb.array([
+          this.fb.group(&#123;
+            firstname: ['', Validators.required],
+            lastname: ['', Validators.required],
+            share: [
+              0,
+              [
+                Validators.required,
+                Validators.pattern('([0-9]*?)'),
+                Validators.min(0),
+                Validators.max(100),
+              ],
+            ],
+          &#125;),
+        ]),
+      &#125;,
+      &#123; validators: [getValidationErrors] &#125;
+    );
+  &#125;
+
+  get actionnaires() &#123;
+    return this.formulaire.controls.actionnaires as FormArray;
+  &#125;
+
+  onClick() &#123;
+    console.log(this.formulaire);
+  &#125;
+
+  addShareholder() &#123;
+    this.actionnaires.push(
+      this.fb.group(&#123;
+        firstname: ['', Validators.required],
+        lastname: ['', Validators.required],
+        share: [
+          0,
+          [
+            Validators.required,
+            Validators.pattern('([0-9]*?)'),
+            Validators.min(0),
+            Validators.max(100),
+          ],
+        ],
+      &#125;)
+    );
+  &#125;
+
+  deleteActionnaire(id: number) &#123;
+    this.actionnaires.removeAt(id);
+  &#125;
+    </pre>
+  </code>
+</div>

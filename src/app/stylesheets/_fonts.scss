@@ -1,0 +1,36 @@
+@import 'typography.scss';
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: $font-weight-bold;
+  font-style: normal;
+  src: url('../assets/fonts/HelveticaNeue-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: $font-weight-normal;
+  font-style: italic;
+  src: url('../assets/fonts/HelveticaNeue-Italic.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: $font-weight-bold;
+  font-style: italic;
+  src: url('../assets/fonts/HelveticaNeue-BoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: $font-weight-condensed;
+  font-style: normal;
+  src: url('../assets/fonts/HelveticaNeue-CondensedBold.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../assets/fonts/HelveticaNeue.ttf');
+}

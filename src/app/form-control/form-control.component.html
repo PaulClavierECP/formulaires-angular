@@ -1,0 +1,88 @@
+<h2>Construisons le template pour un formulaire</h2>
+
+<ul>
+  <li>Le <code>formControl</code></li>
+  <li>Les validateurs</li>
+</ul>
+
+<form (ngSubmit)="onClick()">
+  <div class="error-message">
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  </div>
+  <label> Remplissez votre email </label>
+  <input
+    type="text"
+    name="email"
+    [formControl]="email"
+    placeholder="@sipios.com"
+  />
+  <bpi-button type="submit"> Save </bpi-button>
+</form>
+
+<bpi-button (click)="updateEmail()">Remplir</bpi-button>
+
+<bpi-button color="secondary" (click)="this.showCode = !this.showCode"
+  >Code</bpi-button
+>
+
+<div *ngIf="showCode">
+  <h2>Plan</h2>
+  <ul>
+    <li>Construire l'input en HTML</li>
+    <li>Wrapper avec le form et le submit</li>
+    <li>Créer le formulaire en TS</li>
+    <li>Créer le Validator required avec le message d'erreur</li>
+    <li>Save sans remplir</li>
+    <li>Créer le Validator email avec le message d'erreur</li>
+    <li>Save avec mauvais format</li>
+    <li>Créer la fonction update et le bouton</li>
+  </ul>
+  <h2>Code</h2>
+  <p>HTML</p>
+  <code>
+    <pre>
+    &lt;form (ngSubmit)="onClick()"&gt;
+      &lt;div class="error-message"&gt;
+        &lt;p *ngIf="errorMessage"&gt;{{ errorMessage }}&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;label&gt; Remplissez votre email &lt;/label&gt;
+      &lt;input
+        type="text"
+        name="email"
+        [formControl]="email"
+        placeholder="@sipios.com"
+      /&gt;
+      &lt;bpi-button type="submit"&gt; Save &lt;/bpi-button&gt;
+    &lt;/form&gt;
+    &lt;bpi-button (click)="updateEmail()"&gt;Remplir&lt;/bpi-button&gt;
+  </pre
+    >
+  </code>
+
+  <p>TypeScript</p>
+
+  <code>
+    <pre>
+    constructor(private router: Router)&#123;&#125;
+    errorMessage: string | null = null;
+    email = new FormControl('', [Validators.required, Validators.email]);
+
+    showCode = false;
+
+    updateEmail() &#123;
+      this.email.setValue('paulc@sipios.com');
+    &#125;
+
+    onClick() &#123;
+      if (this.email.errors?.required) &#123;
+        this.errorMessage = 'Mais enfin écrivez cet email !';
+      &#125; else if (this.email.errors?.email) &#123;
+        this.errorMessage = "Je vous ai dit d' entrer un mail ...";
+      &#125; else &#123;
+        this.errorMessage = null;
+        this.router.navigate(['/home']);
+      &#125;
+    &#125;
+    </pre>
+  </code>
+</div>

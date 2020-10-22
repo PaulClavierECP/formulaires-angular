@@ -1,0 +1,47 @@
+@import './utils.scss';
+
+ul {
+  list-style: disc outside;
+  padding-left: spacing(3);
+}
+
+strong {
+  font-weight: $font-weight-bold;
+}
+
+.site-title {
+  font-weight: $font-weight-condensed;
+  line-height: 58px;
+  font-size: 48px;
+  color: #b12418;
+}
+
+.page-title {
+  font-weight: $font-weight-condensed;
+  font-size: 36px;
+  line-height: 54px;
+}
+
+.section-title {
+  font-weight: $font-weight-condensed;
+  font-size: 26px;
+  line-height: 39px;
+}
+
+.subtitle {
+  font-weight: $font-weight-bold;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.mat-tab-header {
+  margin-bottom: spacing(4);
+
+  .mat-ink-bar {
+    background: $primary;
+  }
+
+  .mat-tab-label {
+    min-width: 0 !important;
+  }
+}
