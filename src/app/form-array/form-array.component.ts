@@ -7,7 +7,6 @@ import {
   AbstractControl,
   FormGroup,
 } from '@angular/forms';
-import { TooltipIntent } from '@bpi/shared-components/core';
 
 const getValidationErrors: ValidatorFn = (control: AbstractControl) => {
   const values = control.get('actionnaires').value;
@@ -27,7 +26,6 @@ const getValidationErrors: ValidatorFn = (control: AbstractControl) => {
 })
 export class FormArrayComponent {
   showCode = false;
-  public TooltipIntent = TooltipIntent;
 
   formulaire: FormGroup;
   errorMessage: string | null = null;

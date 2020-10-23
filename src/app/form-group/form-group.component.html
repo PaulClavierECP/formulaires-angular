@@ -25,12 +25,10 @@
     <span class="checkmark"></span>
   </label>
 
-  <bpi-button type="submit" [disabled]="!inscription.valid"> Save </bpi-button>
+  <button type="submit" [disabled]="!inscription.valid">Save</button>
 </form>
 
-<bpi-button color="secondary" (click)="this.showCode = !this.showCode"
-  >Code</bpi-button
->
+<button color="secondary" (click)="this.showCode = !this.showCode">Code</button>
 
 <div *ngIf="showCode">
   <h2>Plan</h2>
@@ -58,7 +56,7 @@
             &lt;span class="checkmark"&gt;&lt;/span&gt;
           &lt;/label&gt;
         &lt;/div&gt;
-        &lt;bpi-button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/bpi-button&gt;
+        &lt;button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/button&gt;
       &lt;/form&gt;
   </pre
     >

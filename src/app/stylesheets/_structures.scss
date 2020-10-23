@@ -1,4 +1,4 @@
-@import './utils.scss';
+@import "./utils.scss";
 
 .title-block {
   margin-bottom: spacing(7);
@@ -28,13 +28,13 @@
   @include isMobile {
     flex-direction: column;
 
-    .bpi-button {
+    .button {
       text-align: center;
       display: block;
       width: 100%;
     }
 
-    .bpi-button_content {
+    .button_content {
       justify-content: center;
     }
   }

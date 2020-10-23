@@ -1,26 +1,24 @@
-<bpi-button color="secondary" (click)="this.help = !this.help" [icon]="true"
-  >Aide</bpi-button
->
+<button color="secondary" (click)="this.help = !this.help">Aide</button>
 <ul *ngIf="help">
   <li>
-    <bpi-button color="secondary" (click)="this.showCode1 = !this.showCode1"
-      >1. Présenter le modèle du Formulaire</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode1 = !this.showCode1">
+      1. Présenter le modèle du Formulaire
+    </button>
   </li>
   <li>
-    <bpi-button color="secondary" (click)="this.showCode2 = !this.showCode2"
-      >2. Créer le contenu du Formulaire</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode2 = !this.showCode2">
+      2. Créer le contenu du Formulaire
+    </button>
   </li>
   <li>
-    <bpi-button color="secondary" (click)="this.showCode3 = !this.showCode3"
-      >3. Créer le Formulaire</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode3 = !this.showCode3">
+      3. Créer le Formulaire
+    </button>
   </li>
   <li>
-    <bpi-button color="secondary" (click)="this.showCode4 = !this.showCode4"
-      >4. Créer controls et inputs du Formulaire</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode4 = !this.showCode4">
+      4. Créer controls et inputs du Formulaire
+    </button>
   </li>
 </ul>
 
