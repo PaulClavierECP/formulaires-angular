@@ -1,43 +1,41 @@
 <h2>Construisons le template pour un formulaire</h2>
 
-<bpi-button color="secondary" (click)="this.help = !this.help" [icon]="true"
-  >Aide</bpi-button
->
+<button color="secondary" (click)="this.help = !this.help">Aide</button>
 <ul *ngIf="help">
   <li>
-    <bpi-button color="secondary" (click)="this.showCode1 = !this.showCode1"
-      >1. créer un FormControl</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode1 = !this.showCode1">
+      1. créer un FormControl
+    </button>
   </li>
   <li>
-    <bpi-button color="secondary" (click)="this.showCode2 = !this.showCode2"
-      >2. créer un update sur le FormControl</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode2 = !this.showCode2">
+      2. créer un update sur le FormControl
+    </button>
   </li>
   <li>
-    <bpi-button color="secondary" (click)="this.showCode3 = !this.showCode3"
-      >3. créer un FormBuilder + FormGroup</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode3 = !this.showCode3">
+      3. créer un FormBuilder + FormGroup
+    </button>
   </li>
   <li>
-    <bpi-button color="secondary" (click)="this.showCode4 = !this.showCode4"
-      >4. créer un disable sur le FormGroup</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode4 = !this.showCode4">
+      4. créer un disable sur le FormGroup
+    </button>
   </li>
   <li>
-    <bpi-button color="secondary" (click)="this.showCode5 = !this.showCode5"
-      >5. créer un FormArray</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode5 = !this.showCode5">
+      5. créer un FormArray
+    </button>
   </li>
   <li>
-    <bpi-button color="secondary" (click)="this.showCode6 = !this.showCode6"
-      >6. créer les Add / Delete</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode6 = !this.showCode6">
+      6. créer les Add / Delete
+    </button>
   </li>
   <li>
-    <bpi-button color="secondary" (click)="this.showCode7 = !this.showCode7"
-      >7. créer un customValidator</bpi-button
-    >
+    <button color="secondary" (click)="this.showCode7 = !this.showCode7">
+      7. créer un customValidator
+    </button>
   </li>
 </ul>
 
@@ -56,7 +54,7 @@
 
   <div *ngFor="let actionnaire of actionnaires.controls; let i = index">
     <div [formGroup]="actionnaire">
-      <p>Actionnaire {{ i + 1 }}</p>
+      <p>Actionnaire NaN</p>
       <div class="delete" (click)="deleteActionnaire(i)">Supprimer</div>
 
       <label>Les actions de ton potes</label>
@@ -67,7 +65,7 @@
     <p>Allez on en rajoute un !</p>
   </button>
   <button type="button" (click)="updateName()">Fill</button>
-  <bpi-button type="submit" [disabled]="!inscription.valid"> Save </bpi-button>
+  <button type="submit" [disabled]="!inscription.valid">Save</button>
 </form>
 
 <div *ngIf="showCode1">
@@ -78,7 +76,7 @@
       &lt;form (ngSubmit)="onClick()"&gt;
         &lt;label&gt;Tu t'appelles ?&lt;/label&gt;
         &lt;input type="text" placeholder="Nom" formControlName="name" /&gt;
-        &lt;bpi-button type="submit" [disabled]="!name.valid"&gt; Save &lt;/bpi-button&gt;
+        &lt;button type="submit" [disabled]="!name.valid"&gt; Save &lt;/button&gt;
       &lt;/form&gt;
     </pre>
   </code>
@@ -104,7 +102,7 @@
         &lt;label&gt;Tu t'appelles ?&lt;/label&gt;
         &lt;input type="text" placeholder="Nom" formControlName="firstname" /&gt;
         &lt;button type="button" (click)="updateName()"&gt; Fill &lt;/button&gt;
-        &lt;bpi-button type="submit" [disabled]="!name.valid"&gt; Save &lt;/bpi-button&gt;
+        &lt;button type="submit" [disabled]="!name.valid"&gt; Save &lt;/button&gt;
       &lt;/form&gt;
     </pre>
   </code>
@@ -142,7 +140,7 @@
         &lt;input type="text" placeholder="Ton nom" formControlName="lastname" /&gt;&lt;br /&gt;
 
         &lt;button type="button" (click)="updateName()"&gt;Fill&lt;/button&gt;
-        &lt;bpi-button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/bpi-button&gt;
+        &lt;button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/button&gt;
       &lt;/form&gt;
     </pre>
   </code>
@@ -192,7 +190,7 @@
         &lt;input type="text" formControlName="gender" /&gt;&lt;br /&gt;
 
         &lt;button type="button" (click)="updateName()"&gt;Fill&lt;/button&gt;
-        &lt;bpi-button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/bpi-button&gt;
+        &lt;button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/button&gt;
       &lt;/form&gt;
     </pre>
   </code>
@@ -259,7 +257,7 @@
           &lt;/div&gt;
         &lt;/div&gt;
         &lt;button type="button" (click)="updateName()"&gt;Fill&lt;/button&gt;
-        &lt;bpi-button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/bpi-button&gt;
+        &lt;button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/button&gt;
       &lt;/form&gt;
 
     </pre>
@@ -341,7 +339,7 @@
           &lt;p&gt;Allez on en rajoute un !&lt;/p&gt;
         &lt;/button&gt;
         &lt;button type="button" (click)="updateName()"&gt;Fill&lt;/button&gt;
-        &lt;bpi-button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/bpi-button&gt;
+        &lt;button type="submit" [disabled]="!inscription.valid"&gt; Save &lt;/button&gt;
       &lt;/form&gt;
     </pre>
   </code>

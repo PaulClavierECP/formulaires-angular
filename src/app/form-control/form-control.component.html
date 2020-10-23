@@ -16,14 +16,12 @@
     [formControl]="email"
     placeholder="@sipios.com"
   />
-  <bpi-button type="submit"> Save </bpi-button>
+  <button type="submit">Save</button>
 </form>
 
-<bpi-button (click)="updateEmail()">Remplir</bpi-button>
+<button (click)="updateEmail()">Remplir</button>
 
-<bpi-button color="secondary" (click)="this.showCode = !this.showCode"
-  >Code</bpi-button
->
+<button color="secondary" (click)="this.showCode = !this.showCode">Code</button>
 
 <div *ngIf="showCode">
   <h2>Plan</h2>
@@ -52,9 +50,9 @@
         [formControl]="email"
         placeholder="@sipios.com"
       /&gt;
-      &lt;bpi-button type="submit"&gt; Save &lt;/bpi-button&gt;
+      &lt;button type="submit"&gt; Save &lt;/button&gt;
     &lt;/form&gt;
-    &lt;bpi-button (click)="updateEmail()"&gt;Remplir&lt;/bpi-button&gt;
+    &lt;button (click)="updateEmail()"&gt;Remplir&lt;/button&gt;
   </pre
     >
   </code>

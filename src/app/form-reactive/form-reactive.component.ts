@@ -26,7 +26,7 @@ const getValidationErrors: ValidatorFn = (control: AbstractControl) => {
   templateUrl: './form-reactive.component.html',
   styleUrls: ['./form-reactive.component.scss'],
 })
-export class FormReactiveComponent implements OnInit {
+export class FormReactiveComponent {
   help = false;
   showCode1 = false;
   showCode2 = false;
@@ -39,20 +39,17 @@ export class FormReactiveComponent implements OnInit {
   inscription: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router) {
-    this.inscription = this.fb.group(
-      {
-        firstname: ['', Validators.required],
-        lastname: ['', Validators.required],
-        fillGender: [false],
-        gender: [{ value: null, disabled: true }],
-        actionnaires: this.fb.array([
-          this.fb.group({
-            action: [0],
-          }),
-        ]),
-      },
-      { validators: [getValidationErrors] }
-    );
+    this.inscription = this.fb.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      fillGender: [false],
+      gender: [{ value: null, disabled: true }],
+      actionnaires: this.fb.array([
+        this.fb.group({
+          action: [0],
+        }),
+      ]),
+    });
   }
 
   get actionnaires() {
@@ -77,7 +74,7 @@ export class FormReactiveComponent implements OnInit {
   addActionnaire() {
     this.actionnaires.push(
       this.fb.group({
-        action: [0],
+        share: [0],
       })
     );
   }

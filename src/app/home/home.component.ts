@@ -11,22 +11,23 @@ export class HomeComponent {
   constructor(private router: Router) {}
 
   steps = [
-    { name: '1-reactive', label: '1. Créer un reactive form' },
-    { name: '2-dynamic', label: '2. Créer un dynamic form' },
-    { name: 'detail-control', label: 'Detail. Créer un formControl' },
-    { name: 'detail-group', label: 'Detail. Créer un formGroup' },
-    { name: 'detail-array', label: 'Detail. Créer un formArray' },
+    { key: '1-reactive', value: '1. Créer un reactive form' },
+    { key: '2-dynamic', value: '2. Créer un dynamic form' },
+    { key: 'detail-control', value: 'Detail. Créer un formControl' },
+    { key: 'detail-group', value: 'Detail. Créer un formGroup' },
+    { key: 'detail-array', value: 'Detail. Créer un formArray' },
 
-    { name: 'bonus-composant', label: 'Bonus. Créer un composant' },
+    { key: 'bonus-composant', value: 'Bonus. Créer un composant' },
     {
-      name: 'bonus-template',
-      label: 'Bonus. Créer un formulaire template-driven',
+      key: 'bonus-template',
+      value: 'Bonus. Créer un formulaire template-driven',
     },
   ];
 
   page = new FormControl('');
 
   onClick() {
+    console.log(this.page.value);
     this.router.navigate(['/', this.page.value]);
   }
 }

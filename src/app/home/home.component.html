@@ -1,7 +1,6 @@
-<bpi-styled-select
-  label="Aller à l'étape"
-  name="page"
-  [choices]="steps"
-  [inputFormControl]="page"
-></bpi-styled-select>
-<bpi-button type="submit" (click)="onClick()">GO</bpi-button>
+<select [formControl]="page">
+  <option *ngFor="let step of steps" [value]="step.key">
+    {{ step.value }}
+  </option>
+</select>
+<button type="submit" (click)="onClick()">GO</button>

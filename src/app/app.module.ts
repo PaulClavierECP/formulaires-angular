@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BpiSharedUiComponentsModule } from '@bpi/shared-components/ui-components';
 import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -34,7 +33,6 @@ import { DynamicElemComponent } from './dynamic-form/dynamic-elem/dynamic-elem.c
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BpiSharedUiComponentsModule,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,

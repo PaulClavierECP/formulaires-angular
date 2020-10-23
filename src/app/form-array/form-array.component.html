@@ -32,19 +32,13 @@
       </div>
     </button>
   </div>
-  <bpi-button type="submit" [disabled]="!formulaire.valid"> Save </bpi-button>
+  <button type="submit" [disabled]="!formulaire.valid">Save</button>
 </form>
-<bpi-tooltip
-  class="error-tooltip"
-  *ngIf="formulaire.errors?.sumOfShares"
-  [intent]="TooltipIntent.ERROR"
-  title="Erreur de formulaire"
-  text="La somme des parts ne fait pas 100%"
-></bpi-tooltip>
+<p class="error-tooltip" *ngIf="formulaire.errors?.sumOfShares">
+  La somme des parts ne fait pas 100%
+</p>
 
-<bpi-button color="secondary" (click)="this.showCode = !this.showCode"
-  >Code</bpi-button
->
+<button color="secondary" (click)="this.showCode = !this.showCode">Code</button>
 
 <div *ngIf="showCode">
   <h2>Plan</h2>
@@ -85,15 +79,11 @@
             &lt;/div&gt;
           &lt;/button&gt;
         &lt;/div&gt;
-        &lt;bpi-button type="submit" [disabled]="!formulaire.valid"&gt; Save &lt;/bpi-button&gt;
+        &lt;button type="submit" [disabled]="!formulaire.valid"&gt; Save &lt;/button&gt;
       &lt;/form&gt;
-      &lt;bpi-tooltip
-        class="error-tooltip"
-        *ngIf="formulaire.errors?.sumOfShares"
-        [intent]="TooltipIntent.ERROR"
-        title="Erreur de formulaire"
-        text="La somme des parts ne fait pas 100%"
-      &gt;&lt;/bpi-tooltip&gt;
+      &lt;p class="error-tooltip" *ngIf="formulaire.errors?.sumOfShares"&gt;
+        La somme des parts ne fait pas 100%
+        &lt;/p&gt;
     </pre>
   </code>
   <p>Validator</p>
