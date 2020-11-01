@@ -69,7 +69,7 @@
 </form>
 
 <div *ngIf="showCode1">
-  <h2>Code</h2>
+  <h2>Code 1</h2>
   <p>HTML</p>
   <code>
     <pre>
@@ -94,13 +94,13 @@
 </div>
 
 <div *ngIf="showCode2">
-  <h2>Code</h2>
+  <h2>Code 2</h2>
   <p>HTML</p>
   <code>
     <pre>
       &lt;form (ngSubmit)="onClick()"&gt;
         &lt;label&gt;Tu t'appelles ?&lt;/label&gt;
-        &lt;input type="text" placeholder="Nom" formControlName="firstname" /&gt;
+        &lt;input type="text" placeholder="Nom" [formControl]="name" /&gt;
         &lt;button type="button" (click)="updateName()"&gt; Fill &lt;/button&gt;
         &lt;button type="submit" [disabled]="!name.valid"&gt; Save &lt;/button&gt;
       &lt;/form&gt;
@@ -111,11 +111,13 @@
 
   <code>
     <pre>
-      name = new FormControl('');
+      constructor(private router: Router) &#123;&#125;
+
+      name = new FormControl('', Validators.required);
 
       updateName() &#123;
-        this.firstname.setValue('Batman');
-        &#125;
+        this.name.setValue('Batman');
+      &#125;
 
       onClick() &#123;
         this.router.navigate(['/home']);
@@ -125,7 +127,7 @@
 </div>
 
 <div *ngIf="showCode3">
-  <h2>Code</h2>
+  <h2>Code 3</h2>
   <p>HTML</p>
   <code>
     <pre>
@@ -171,7 +173,7 @@
 </div>
 
 <div *ngIf="showCode4">
-  <h2>Code</h2>
+  <h2>Code 4</h2>
   <p>HTML</p>
   <code>
     <pre>
@@ -214,8 +216,10 @@
         let gender = this.inscription.get('gender');
         this.inscription.controls.fillGender.valueChanges.subscribe((data) => &#123;
           if (data && gender) &#123;
+            gender.setValidators(Validators.required);
             gender.enable();
           &#125; else &#123;
+            gender.reset();
             gender.disable();
           &#125;
         &#125;);
@@ -233,7 +237,7 @@
 </div>
 
 <div *ngIf="showCode5">
-  <h2>Code</h2>
+  <h2>Code 5</h2>
   <p>HTML</p>
   <code>
     <pre>
@@ -290,8 +294,10 @@
         let gender = this.inscription.get('gender');
         this.inscription.controls.fillGender.valueChanges.subscribe((data) => &#123;
           if (data && gender) &#123;
+            gender.setValidators(Validators.required);
             gender.enable();
           &#125; else &#123;
+            gender.reset();
             gender.disable();
           &#125;
         &#125;);
@@ -309,7 +315,7 @@
 </div>
 
 <div *ngIf="showCode6">
-  <h2>Code</h2>
+  <h2>Code 6</h2>
   <p>HTML</p>
   <code>
     <pre>
@@ -372,8 +378,10 @@
         let gender = this.inscription.get('gender');
         this.inscription.controls.fillGender.valueChanges.subscribe((data) => &#123;
           if (data && gender) &#123;
+            gender.setValidators(Validators.required);
             gender.enable();
           &#125; else &#123;
+            gender.reset();
             gender.disable();
           &#125;
         &#125;);
@@ -403,7 +411,7 @@
 </div>
 
 <div *ngIf="showCode7">
-  <h2>Code</h2>
+  <h2>Code 7</h2>
   <p>HTML</p>
   <code>
     <pre></pre>
@@ -449,8 +457,10 @@
         let gender = this.inscription.get('gender');
         this.inscription.controls.fillGender.valueChanges.subscribe((data) => &#123;
           if (data && gender) &#123;
+            gender.setValidators(Validators.required);
             gender.enable();
           &#125; else &#123;
+            gender.reset();
             gender.disable();
           &#125;
         &#125;);
