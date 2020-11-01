@@ -60,8 +60,10 @@ export class FormReactiveComponent {
     let gender = this.inscription.get('gender');
     this.inscription.controls.fillGender.valueChanges.subscribe((data) => {
       if (data && gender) {
+        gender.setValidators(Validators.required);
         gender.enable();
       } else {
+        gender.reset();
         gender.disable();
       }
     });
